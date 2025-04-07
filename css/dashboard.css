@@ -1,0 +1,113 @@
+/* Navigation bar styling */
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+/* Main content styling */
+.content {
+    margin-top: 60px; /* Add some space so the navbar doesn't overlap the content */
+    padding: 20px;
+}
+
+/* About Us Section */
+.about-us-section {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.about-us-section h2 {
+    text-align: center;
+}
+
+.about-us-section .team-photo {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.about-us-section .team-description {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.about-us-section .row {
+    margin-top: 30px;
+}
+
+.about-us-section .team-member {
+    text-align: center;
+}
+
+.about-us-section .team-member img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Services Section */
+.services-section {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.services-section h2 {
+    text-align: center;
+}
+
+.services-section .service-card {
+    margin-bottom: 20px;
+}
+
+.services-section .card-body {
+    text-align: center;
+}
+
+.services-section .btn-appointment {
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Events Section */
+.events-section {
+    margin-top: 50px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Adjust content for smaller screens */
+@media (max-width: 767px) {
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+}

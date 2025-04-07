@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <title>Login</title>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-3xl font-bold text-center mb-6">Login</h1>
+    <form action="#" method="POST">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700 font-medium">Username</label>
+        <input type="text" id="username" name="username"
+          class="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter your username" required>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-medium">Password</label>
+        <input type="password" id="password" name="password"
+          class="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter your password" required>
+      </div>
+      <div class="flex items-center justify-between">
+        <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600">Log
+          In</button>
+      </div>
+      <div class="mt-4 text-center">
+        <a href="#" class="text-blue-500 hover:underline">Forgot your password?</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+hover:grid-cols-6

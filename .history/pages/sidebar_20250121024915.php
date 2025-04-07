@@ -1,0 +1,41 @@
+<?php
+// Database connection
+$conn = new mysqli('localhost', 'root', '122401', 'dbusers');
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to get total registered users
+$userQuery = "SELECT COUNT(*) AS total_users FROM users";
+$userResult = mysqli_query($conn, $userQuery);
+$totalUsers = mysqli_fetch_assoc($userResult)['total_users'];
+
+// Query to get the number of total bookings
+$bookingQuery = "SELECT COUNT(*) AS total_bookings FROM bookings";
+$bookingResult = mysqli_query($conn, $bookingQuery);
+$totalBookings = mysqli_fetch_assoc($bookingResult)['total_bookings'];
+
+// Query to get counts of users marked as completed
+$statusQuery = "SELECT COUNT(*) AS completed_users FROM users WHERE status = 'completed'";
+$statusResult = mysqli_query($conn, $statusQuery);
+$completedUsers = mysqli_fetch_assoc($statusResult)['completed_users'];
+
+$conn->close();
+?>
+
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-800 text-white">
+    <div class="h-full px-3 py-4 overflow-y-auto">
+        <h1 class="text-center text-lg font-bold mb-4">Admin Panel</h1>
+        <ul class="space-y-2">
+            <li><a href="./main_dashboard.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a></li>
+            <li><a href="./booking-records.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-calendar-alt mr-2"></i> Appointment Management</a></li>
+            <li><a href="./requested_reschedule.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-redo-alt mr-2"></i> Rescheduling Request</a></li>
+            <li><a href="./manage_users.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-users mr-2"></i> Manage Users</a></li>
+            <li><a href="./manage_admin.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-user-shield mr-2"></i> Manage Admins</a></li>
+            <li><a href="./create_admin.php" class="flex items-center px-4 py-2 hover:bg-gray-700 rounded"><i class="fas fa-user-shield mr-2"></i> Create Admin</a></li>
+            <li><a href="../logout-admin.php" class="flex items-center px-4 py-2 hover:bg-red-700 rounded"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a></li>
+        </ul>
+    </div>
+</aside>

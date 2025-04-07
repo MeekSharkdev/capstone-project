@@ -1,0 +1,21 @@
+/* Hero Section */
+.hero-section .container h1 {
+    font-size: 3.5rem; /* Slightly bigger title */
+}
+
+.hero-section .container p {
+    font-size: 1.4rem; /* Slightly bigger paragraph */
+}
+
+/* History Section */
+.history-section h3 {
+    font-size: 2rem; /* Increased font size for headings */
+}
+
+.history-section p {
+    font-size: 1.2rem; /* Increased font size for paragraphs */
+}
+
+.history-section .lead {
+    font-size: 1.1rem; /* Slight increase in paragraph text */
+}

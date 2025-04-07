@@ -1,0 +1,9 @@
+{
+  "scripts": {npx tailwindcss -i ./src/input.css -o ./src/output.css --watch},
+  "dependencies": {
+    "pagedone": "^1.2.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

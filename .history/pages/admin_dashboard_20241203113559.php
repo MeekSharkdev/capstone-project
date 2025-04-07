@@ -1,0 +1,184 @@
+<?php
+// Include the database connection
+include('../config/mysqli_connect.php');
+
+// Check if the connection was successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Fetch booking data from the database with a join between bookings and users
+$query = "SELECT bookings.bookings_id, bookings.booking_date, bookings.name, bookings.email, bookings.purpose
+          FROM bookings 
+          LEFT  JOIN users ON bookings.bookings_id = users.id"; // Fixed join condition
+          
+// Execute the query
+$result = mysqli_query($conn, $query);
+
+// Check if there was an error with the query
+if (!$result) {
+    die("Error in query: " . mysqli_error($conn));
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="../asset/img/SOLEHUBS.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../asset/css/home.css">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575d63;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 270px; /* Adjust for sidebar width */
+            padding: 20px;
+        }
+
+        /* Table Styles */
+        .table-responsive {
+            margin-top: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin</a>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="./main_dashboard.php">Dashboard</a>
+        <a href="./admin_dashboard.php">Booking Schedule Records</a>
+        <a href="./manage_users.php">User Management</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h2>Booking Records</h2>
+            <div class="table-responsive">
+                <table class="table table-striped" id="bookingTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Booking Purpose</th>
+                            <th>Booking Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr bookings_id='row" . $row['bookings_id'] . "'>";
+                                echo "<td>" . $row['bookings_id'] . "</td>";
+                                echo "<td>" . $row['name'] . "</td>";
+                                echo "<td>" . $row['email'] . "</td>";
+                                echo "<td>" . $row['purpose'] . "</td>";
+                                echo "<td>" . $row['booking_date'] . "</td>";
+                                echo "<td>
+                                    <button 
+                                        class='btn btn-info view-btn' 
+                                        data-bs-toggle='modal' 
+                                        data-bs-target='#viewModal' 
+                                        data-id='" . $row['bookings_id'] . "' 
+                                        data-name='" . $row['name'] . "' 
+                                        data-email='" . $row['email'] . "' 
+                                        data-purpose='" . $row['purpose'] . "' 
+                                        data-date='" . $row['booking_date'] . "'>
+                                        View
+                                    </button>
+                                </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='6'>No bookings found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewModalLabel">Booking Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> <span id="modalName"></span></p>
+                    <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                    <p><strong>Purpose:</strong> <span id="modalPurpose"></span></p>
+                    <p><strong>Date:</strong> <span id="modalDate"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Confirm Schedule</button>
+                    <button type="button" class="btn btn-warning">Reschedule</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Populate modal with data from the clicked button
+        document.querySelectorAll('.view-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.getElementById('modalName').textContent = button.getAttribute('data-name');
+                document.getElementById('modalEmail').textContent = button.getAttribute('data-email');
+                document.getElementById('modalPurpose').textContent = button.getAttribute('data-purpose');
+                document.getElementById('modalDate').textContent = button.getAttribute('data-date');
+            });
+        });
+    </script>
+</body>
+</html>

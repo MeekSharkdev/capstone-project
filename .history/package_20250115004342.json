@@ -1,0 +1,11 @@
+{
+  "scripts": { 
+    "start"
+  },
+  "dependencies": {
+    "pagedone": "^1.2.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

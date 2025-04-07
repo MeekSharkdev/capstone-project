@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Login</title>
+    <script>
+      function togglePassword() {
+        var passwordField = document.getElementById("floating_password");
+        var eyeIcon = document.getElementById("eye-icon");
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          eyeIcon.src =
+            "https://img.icons8.com/ios-filled/50/000000/visible.png"; // eye icon when visible
+        } else {
+          passwordField.type = "password";
+          eyeIcon.src =
+            "https://img.icons8.com/ios-filled/50/000000/invisible.png"; // eye icon when hidden
+        }
+      }
+    </script>
+  </head>
+
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <form class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg w-full">
+      <h1 class="text-3xl font-bold text-center mb-6">Login</h1>
+
+      <div class="relative z-0 w-full mb-5 group">
+        <input
+          type="text"
+          name="username"
+          id="floating_username"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required />
+        <label
+          for="floating_username"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Username</label
+        >
+      </div>
+
+      <div class="relative z-0 w-full mb-5 group">
+        <input
+          type="password"
+          name="password"
+          id="floating_password"
+          class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required />
+        <label
+          for="floating_password"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Password</label
+        >
+
+        <!-- Eye icon for toggling password visibility -->
+        <img
+          id="eye-icon"
+          src="https://img.icons8.com/ios-filled/50/000000/invisible.png"
+          alt="eye-icon"
+          class="w-7 absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer"
+          onclick="togglePassword()" />
+      </div>
+
+      <div class="flex justify-between items-center">
+        <button
+          type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+          Log In
+        </button>
+      </div>
+
+      <div class="mt-4 text-center">
+        <a href="#" class="text-blue-500 hover:underline"
+          >Forgot your password?</a
+        >
+      </div>
+    </form>
+  </body>
+</html>
